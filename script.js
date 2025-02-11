@@ -1,4 +1,4 @@
-const imageFolder = 'images/';
+const imageFolder = '/career-center-presentation/images/';
 let images = [];
 let currentIndex = 0;
 
