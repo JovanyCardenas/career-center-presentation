@@ -9,8 +9,8 @@ body {
 }
 
 .slideshow-container {
-    width: 80%;
-    height: 80%;
+    width: 95%;
+    height: 95%;
     overflow: hidden;
     position: relative;
 }
