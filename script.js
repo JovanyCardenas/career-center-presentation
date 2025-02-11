@@ -6,8 +6,8 @@ let currentIndex = 0;
 function loadImages() {
     // Assuming you know the image filenames
     images = [
-        'collegecorpsmidyear1.jpg',
-        'collegecorpsmidyear2.jpg',
+        'collegecorps/midyear1.jpg',
+        'collegecorps/midyear2.jpg',
     ];
 
     shuffleImages();
