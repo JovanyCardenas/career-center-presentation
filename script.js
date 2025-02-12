@@ -1,6 +1,9 @@
 const imageFolder = '/career-center-presentation/images/';
 let images = [];
+let displayedImages = [];
 let currentIndex = 0;
+let isTransitioning = false; // To prevent overlapping transitions
+
 
 // Populate the images array with the list of images in the folder
 function loadImages() {
@@ -234,27 +237,40 @@ function loadImages() {
 
 // Shuffle the images in random order
 function shuffleImages() {
-    for (let i = images.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [images[i], images[j]] = [images[j], images[i]]; // Swap elements
+
+    if (displayedImages.length === images.length) {
+        displayedImages = [];
     }
+
+    let remainingImages = images.filter((image, index) => !displayedImages.includes(index));
+
+    for (let i = remainingImages.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [remainingImages[i], remainingImages[j]] = [remainingImages[j], remainingImages[i]]; // Swap elements
+    }
+
+    displayedImages.push(...remainingImages.map((_, index) => images.indexOf(remainingImages[index])));
 }
 
 // Display the next image in the shuffled array
 function showNextImage() {
+    if (isTransitioning) return;
+
+    isTransitioning = true;
     const imageElement = document.getElementById('slideshow');
     imageElement.style.opacity = 0;
 
     setTimeout(()=>{
-        imageElement.src = `${imageFolder}${images[currentIndex]}`;
-        currentIndex = (currentIndex + 1) % images.length;
+        imageElement.src = `${imageFolder}${images[displayedImages[currentIndex]]}`;
+        currentIndex = (currentIndex + 1) % displayedImages.length;
 
         setTimeout(()=>{
             imageElement.style.opacity = 1;
+            isTransitioning = false;
         }, 50);
     }, 1000);
 
-    setTimeout(showNextImage, 3000); // Change image every 3 seconds
+    setInterval(showNextImage, 3000); // Change image every 3 seconds
 }
 
 window.onload = loadImages;
