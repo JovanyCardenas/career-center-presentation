@@ -268,7 +268,7 @@ function showNextImage() {
             imageElement.style.opacity = 1;
             isTransitioning = false;
         }, 50);
-    }, 1000);
+    }, 500);
 
     setInterval(showNextImage, 3000); // Change image every 3 seconds
 }

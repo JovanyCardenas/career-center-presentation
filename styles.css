@@ -21,5 +21,5 @@ body {
     object-fit: cover;
     opacity: 0;
     position: absolute;
-    transition: opacity 1s ease-in-out;
+    transition: opacity 500ms ease-in-out;
 }
